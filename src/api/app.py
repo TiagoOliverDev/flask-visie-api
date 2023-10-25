@@ -116,7 +116,7 @@ def all_data_by_id(id):
     })
  
 @app.route('/update', methods=['GET', 'POST'])
-def update():    
+def update():
     conn = MySQLdb.connect(**db_config)
     cursor = conn.cursor()
     response_object = {'status': 'success'}
@@ -133,10 +133,13 @@ def update():
         data_nascimento_formatada = Aux.formatar_data(edit_data_nascimento)
         data_admissao_formatada = Aux.formatar_data(edit_data_admissao)
 
-        cursor.execute (f"UPDATE pessoas SET nome=%s, rg=%s, cpf=%s, data_nascimento=%s, data_admissao=%s, funcao=%s WHERE id_pessoa={edit_id}",(edit_nome, edit_rg, edit_cpf, data_nascimento_formatada, data_admissao_formatada, edit_funcao))
+        sql = "UPDATE pessoas SET nome=%s, rg=%s, cpf=%s, data_nascimento=%s, data_admissao=%s, funcao=%s WHERE id_pessoa=%s"
+        values = (edit_nome, edit_rg, edit_cpf, data_nascimento_formatada, data_admissao_formatada, edit_funcao, edit_id)
+
+        cursor.execute(sql, values)
         conn.commit()
         cursor.close()
- 
+
         response_object['message'] = "Successfully Updated"
     return jsonify(response_object)
  
