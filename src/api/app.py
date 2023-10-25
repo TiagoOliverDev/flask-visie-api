@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import MySQLdb
 from aux import Aux
+from decouple import config
 
 
 DEBUG = True
@@ -11,14 +12,19 @@ app = Flask(__name__)
 app.config.from_object(__name__)
      
    
-db_config = {
-    'user': 'tiagooliveira',
-    'password': 'dGlhZ29vbGl2',
-    'host': 'jobs.visie.com.br',
-    'port': 3306,
-    'database': 'tiagooliveira',
-}
+DB_USER = config('DB_USER', default='tiagooliveira')
+DB_PASSWORD = config('DB_PASSWORD', default='dGlhZ29vbGl2')
+DB_HOST = config('DB_HOST', default='jobs.visie.com.br')
+DB_PORT = config('DB_PORT', default=3306, cast=int)
+DB_DATABASE = config('DB_DATABASE', default='tiagooliveira')
 
+db_config = {
+    'user': DB_USER,
+    'password': DB_PASSWORD,
+    'host': DB_HOST,
+    'port': DB_PORT,
+    'database': DB_DATABASE,
+}
  
 # CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
