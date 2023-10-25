@@ -34,7 +34,7 @@ Navegue até src/api
 
 No linux rode com: python3 app.py
 
-No windows: pýthon app.py
+No windows: python app.py
 ```
 
 
