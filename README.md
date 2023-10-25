@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ## Rodando API
 
 ```
-Clone a interface: https://github.com/TiagoOliverDev/vuejs-visie.git
+Clone e rode a interface: https://github.com/TiagoOliverDev/vuejs-visie.git
 
 Na FLASK-VISIE-API navegue até src/api
 
